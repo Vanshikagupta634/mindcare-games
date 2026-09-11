@@ -1,0 +1,509 @@
+/* =========================================
+   BRAIN GAMES - COMPLETE STYLE
+   ========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #222;
+}
+
+.container {
+    width: 90%;
+    max-width: 900px;
+    margin: 40px auto;
+}
+
+/* =========================================
+   HOME PAGE
+   ========================================= */
+
+h1 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+.games {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.game-card {
+    width: 100%;
+    min-height: 150px;
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.game-icon {
+    width: 110px;
+    height: 110px;
+    min-width: 110px;
+    border-radius: 12px;
+    background: #eef2ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+}
+
+.game-info {
+    flex: 1;
+}
+
+.game-info h2 {
+    font-size: 23px;
+    margin-bottom: 8px;
+}
+
+.game-info p {
+    color: #666;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+.play-btn {
+    display: inline-block;
+    padding: 9px 20px;
+    background: #4f46e5;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.play-btn:hover {
+    background: #3730a3;
+}
+
+/* =========================================
+   COMMON GAME BUTTONS
+   ========================================= */
+
+.start-btn,
+.back-btn {
+    padding: 12px 28px;
+    font-size: 16px;
+    min-width: 130px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.start-btn {
+    border: none;
+    background: #4f46e5;
+    color: white;
+}
+
+.start-btn:hover {
+    background: #3730a3;
+}
+
+.start-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.back-btn {
+    display: inline-block;
+    background: #ddd;
+    color: #222;
+    text-decoration: none;
+    text-align: center;
+}
+
+.back-btn:hover {
+    background: #ccc;
+}
+
+/* =========================================
+   GAME BUTTON AREA
+   ========================================= */
+
+.game-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+/* =========================================
+   MEMORY GAME
+   ========================================= */
+
+.memory-info {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin: 20px 0;
+    font-size: 20px;
+}
+
+.memory-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    width: 100%;
+    max-width: 800px;
+    margin: 25px auto;
+}
+
+.card {
+    width: 100%;
+    height: 150px;
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 40px;
+    font-weight: bold;
+    color: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.03);
+}
+
+.card.flipped {
+    background: #eef2ff;
+}
+
+.card.matched {
+    background: #e8f5e9;
+    border-color: #4caf50;
+    cursor: default;
+}
+
+.win-message {
+    display: none;
+    text-align: center;
+    background: white;
+    padding: 25px;
+    margin: 25px auto;
+    max-width: 500px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.win-message h2 {
+    margin-bottom: 10px;
+}
+
+.win-message p {
+    margin-top: 8px;
+}
+
+/* =========================================
+   ATTENTION GAME
+   ========================================= */
+
+.attention-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    width: 100%;
+    max-width: 650px;
+    margin: 25px auto;
+}
+
+.attention-shape {
+    height: 100px;
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 15px;
+    font-size: 40px;
+    cursor: pointer;
+    transition: transform 0.15s, background 0.15s;
+}
+
+.attention-shape:hover {
+    transform: scale(1.04);
+    background: #f5f7ff;
+}
+
+.attention-shape:active {
+    transform: scale(0.97);
+}
+
+.game-over {
+    grid-column: 1 / -1;
+    text-align: center;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    font-size: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.game-over p {
+    margin-top: 10px;
+}
+
+/* =========================================
+   REACTION GAME
+   ========================================= */
+
+.reaction-box {
+    width: 100%;
+    max-width: 850px;
+    height: 400px;
+    margin: 30px auto;
+    background: #eeeeee;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.15s;
+}
+
+.reaction-box:hover {
+    transform: scale(1.01);
+}
+
+.reaction-box span {
+    font-size: 45px;
+    font-weight: bold;
+}
+
+.reaction-box.ready {
+    background: #4f46e5;
+    color: white;
+}
+
+/* LARGE RESULT BOX */
+
+.reaction-result {
+    width: 100%;
+    max-width: 700px;
+    min-height: 90px;
+    margin: 20px auto;
+    padding: 25px;
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================================
+   RESULTS PAGE
+   ========================================= */
+
+.results {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin: 30px auto;
+    max-width: 850px;
+}
+
+.result-card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px 15px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.result-icon {
+    font-size: 45px;
+    margin-bottom: 12px;
+}
+
+.result-card h2 {
+    font-size: 19px;
+    margin-bottom: 10px;
+}
+
+.result-card p {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.result-card strong {
+    font-size: 22px;
+    display: block;
+}
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    .container {
+        width: 94%;
+        margin: 25px auto;
+    }
+
+    h1 {
+        font-size: 27px;
+    }
+
+    .subtitle {
+        font-size: 14px;
+        margin-bottom: 25px;
+    }
+
+    /* HOME */
+
+    .game-card {
+        min-height: 125px;
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .game-icon {
+        width: 75px;
+        height: 75px;
+        min-width: 75px;
+        font-size: 35px;
+    }
+
+    .game-info h2 {
+        font-size: 18px;
+    }
+
+    .game-info p {
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+
+    .play-btn {
+        padding: 7px 14px;
+        font-size: 13px;
+    }
+
+    /* MEMORY */
+
+    .memory-info {
+        gap: 30px;
+        font-size: 18px;
+    }
+
+    .memory-board {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+    }
+
+    .card {
+        height: 125px;
+        font-size: 34px;
+    }
+
+    .win-message {
+        padding: 20px;
+    }
+
+    /* ATTENTION */
+
+    .attention-board {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+    }
+
+    .attention-shape {
+        height: 90px;
+        font-size: 32px;
+    }
+
+    /* REACTION */
+
+    .reaction-box {
+        height: 300px;
+        border-radius: 20px;
+    }
+
+    .reaction-box span {
+        font-size: 32px;
+    }
+
+    .reaction-result {
+        min-height: 80px;
+        padding: 20px;
+        font-size: 19px;
+    }
+
+    /* RESULTS */
+    .results {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .result-card {
+        padding: 20px;
+    }
+
+    /* BUTTONS */
+
+    .start-btn,
+    .back-btn {
+        padding: 10px 20px;
+        font-size: 15px;
+        min-width: 115px;
+    }
+}
+/* LARGE OVERALL BRAIN SCORE */
+
+.overall-score {
+    width: 95%;
+    max-width: 850px;
+    min-height: 250px;
+    margin: 35px auto;
+    padding: 45px 30px;
+    background: white;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.overall-score h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.overall-score strong {
+    display: block;
+    font-size: 80px;
+    margin-bottom: 15px;
+}
+
+.overall-score p {
+    color: #666;
+    font-size: 20px;
+}

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results & Progress</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>📊 Results & Progress</h1>
+
+        <p class="subtitle">
+            Track your best performance in Brain Games
+        </p>
+<div class="overall-score">
+    <h2>🧠 Overall Brain Score</h2>
+    <strong id="overall-score">0</strong>
+    <p>Your combined performance</p>
+</div>
+        <div class="results">
+
+            <!-- MEMORY -->
+            <div class="result-card">
+                <div class="result-icon">🧩</div>
+
+                <h2>Memory Game</h2>
+
+                <p>Best Moves</p>
+
+                <strong id="memory-result">
+                    Not played yet
+                </strong>
+            </div>
+
+
+            <!-- ATTENTION -->
+            <div class="result-card">
+                <div class="result-icon">🎯</div>
+
+                <h2>Attention Game</h2>
+
+                <p>Best Score</p>
+
+                <strong id="attention-result">
+                    Not played yet
+                </strong>
+            </div>
+
+
+            <!-- REACTION -->
+            <div class="result-card">
+                <div class="result-icon">⚡</div>
+
+                <h2>Reaction Game</h2>
+
+                <p>Best Reaction</p>
+
+                <strong id="reaction-result-page">
+                    Not played yet
+                </strong>
+            </div>
+
+        </div>
+
+
+        <div class="game-buttons">
+
+            <button id="reset-results" class="start-btn">
+                Reset Results
+            </button>
+
+            <a href="index.html" class="back-btn">
+                Back Home
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        // ==============================
+        // MEMORY BEST
+        // ==============================
+
+        const memoryBest =
+            localStorage.getItem("memoryBest");
+
+        if (memoryBest !== null) {
+
+            document.getElementById("memory-result").textContent =
+                memoryBest + " moves";
+        }
+
+
+        // ==============================
+        // ATTENTION BEST
+        // ==============================
+
+        const attentionBest =
+            localStorage.getItem("attentionBest");
+
+        if (attentionBest !== null) {
+
+            document.getElementById("attention-result").textContent =
+                attentionBest + " points";
+        }
+
+
+        // ==============================
+        // REACTION BEST
+        // ==============================
+
+        const reactionBest =
+            localStorage.getItem("reactionBest");
+
+        if (reactionBest !== null) {
+
+            document.getElementById("reaction-result-page").textContent =
+                reactionBest + " ms";
+        }
+
+// ==============================
+        // OVERALL BRAIN SCORE
+        // ==============================
+
+        const memoryScore =
+            localStorage.getItem("memoryBest");
+
+        const attentionScore =
+            localStorage.getItem("attentionBest");
+
+        const reactionScore =
+            localStorage.getItem("reactionBest");
+
+        let overallScore = 0;
+
+        if (memoryScore !== null) {
+            overallScore += Math.max(0, 100 - Number(memoryScore) * 3);
+        }
+
+        if (attentionScore !== null) {
+            overallScore += Number(attentionScore) * 2;
+        }
+
+        if (reactionScore !== null) {
+            overallScore += Math.max(0, 100 - Number(reactionScore) / 5);
+        }
+
+        overallScore = Math.round(overallScore / 3);
+
+        document.getElementById("overall-score").textContent =
+            overallScore;
+        // ==============================
+        // RESET RESULTS
+        // ==============================
+
+        document.getElementById("reset-results")
+            .addEventListener("click", () => {
+
+                localStorage.removeItem("memoryBest");
+                localStorage.removeItem("attentionBest");
+                localStorage.removeItem("reactionBest");
+
+                document.getElementById("memory-result").textContent =
+                    "Not played yet";
+
+                document.getElementById("attention-result").textContent =
+                    "Not played yet";
+
+                document.getElementById("reaction-result-page").textContent =
+                    "Not played yet";
+            });
+
+    </script>
+
+</body>
+</html>
