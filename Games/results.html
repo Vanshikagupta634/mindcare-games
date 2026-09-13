@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Results & Progress</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <h1>📊 Results & Progress</h1>
+
+        <p class="subtitle">
+            Track your best performance in Brain Games
+        </p>
+
+
+        <!-- OVERALL SCORE -->
+
+        <div class="overall-score">
+
+            <h2>🧠 Overall Brain Score</h2>
+
+            <strong id="overall-score">0</strong>
+
+            <p>Your combined performance</p>
+
+        </div>
+
+
+        <div class="results">
+
+
+            <!-- MEMORY -->
+
+            <div class="result-card">
+
+                <div class="result-icon">🧩</div>
+
+                <h2>Memory Game</h2>
+
+                <p>Best Score</p>
+
+                <strong id="memory-result">
+                    Not played yet
+                </strong>
+
+            </div>
+
+
+            <!-- ATTENTION -->
+
+            <div class="result-card">
+
+                <div class="result-icon">🎯</div>
+
+                <h2>Attention Game</h2>
+
+                <p>Best Score</p>
+
+                <strong id="attention-result">
+                    Not played yet
+                </strong>
+
+            </div>
+
+
+            <!-- REACTION -->
+
+            <div class="result-card">
+
+                <div class="result-icon">⚡</div>
+
+                <h2>Reaction Game</h2>
+
+                <p>Best Score</p>
+
+                <strong id="reaction-result-page">
+                    Not played yet
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="game-buttons">
+
+            <button id="reset-results" class="start-btn">
+                Reset Results
+            </button>
+
+
+            <a href="index.html" class="back-btn">
+                Back Home
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+
+        /* =================================
+           MEMORY SCORE
+           ================================= */
+
+        const memoryScore =
+            localStorage.getItem("memoryScore");
+
+
+        if (memoryScore !== null) {
+
+            document.getElementById(
+                "memory-result"
+            ).textContent =
+                memoryScore + "/100";
+
+        }
+
+
+
+        /* =================================
+           ATTENTION SCORE
+           ================================= */
+
+        const attentionScore =
+            localStorage.getItem("attentionScore");
+
+
+        if (attentionScore !== null) {
+
+            document.getElementById(
+                "attention-result"
+            ).textContent =
+                attentionScore + "/100";
+
+        }
+
+
+
+        /* =================================
+           REACTION SCORE
+           ================================= */
+
+        const reactionScore =
+            localStorage.getItem("reactionScore");
+
+
+        if (reactionScore !== null) {
+
+            document.getElementById(
+                "reaction-result-page"
+            ).textContent =
+                reactionScore + "/100";
+
+        }
+
+
+
+        /* =================================
+           OVERALL BRAIN SCORE
+           ================================= */
+
+        const scores = [];
+
+
+        if (memoryScore !== null) {
+
+            scores.push(
+                Number(memoryScore)
+            );
+
+        }
+
+
+        if (attentionScore !== null) {
+
+            scores.push(
+                Number(attentionScore)
+            );
+
+        }
+
+
+        if (reactionScore !== null) {
+
+            scores.push(
+                Number(reactionScore)
+            );
+
+        }
+
+
+        let overallScore = 0;
+
+
+        /* Calculate average */
+
+        if (scores.length > 0) {
+
+            const total =
+                scores.reduce(
+                    (sum, score) => sum + score,
+                    0
+                );
+
+            overallScore =
+                Math.round(
+                    total / scores.length
+                );
+
+        }
+
+
+        document.getElementById(
+            "overall-score"
+        ).textContent =
+            overallScore + "/100";
+
+
+
+        /* =================================
+           RESET RESULTS
+           ================================= */
+
+        document.getElementById(
+            "reset-results"
+        ).addEventListener(
+            "click",
+            () => {
+
+
+                /* Remove Memory data */
+
+                localStorage.removeItem(
+                    "memoryScore"
+                );
+
+                localStorage.removeItem(
+                    "memoryBest"
+                );
+
+                localStorage.removeItem(
+                    "memoryLastScore"
+                );
+
+                localStorage.removeItem(
+                    "memoryLastMoves"
+                );
+
+
+                /* Remove Attention data */
+
+                localStorage.removeItem(
+                    "attentionScore"
+                );
+
+                localStorage.removeItem(
+                    "attentionBest"
+                );
+
+                localStorage.removeItem(
+                    "attentionLastScore"
+                );
+
+                localStorage.removeItem(
+                    "attentionRawScore"
+                );
+
+                localStorage.removeItem(
+                    "attentionCorrect"
+                );
+
+                localStorage.removeItem(
+                    "attentionWrong"
+                );
+
+
+                /* Remove Reaction data */
+
+                localStorage.removeItem(
+                    "reactionScore"
+                );
+
+                localStorage.removeItem(
+                    "reactionBest"
+                );
+
+                localStorage.removeItem(
+                    "reactionLastScore"
+                );
+
+                localStorage.removeItem(
+                    "reactionLastTime"
+                );
+
+
+                /* Reset display */
+
+                document.getElementById(
+                    "memory-result"
+                ).textContent =
+                    "Not played yet";
+
+
+                document.getElementById(
+                    "attention-result"
+                ).textContent =
+                    "Not played yet";
+
+
+                document.getElementById(
+                    "reaction-result-page"
+                ).textContent =
+                    "Not played yet";
+
+
+                document.getElementById(
+                    "overall-score"
+                ).textContent =
+                    "0/100";
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>
