@@ -3,107 +3,256 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brain Games</title>
-    <link rel="stylesheet" href="style.css">
+    <title>MindCare Dashboard</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #F5F7FB;
+            color: #1F2937;
+        }
+
+        header {
+            background: #1F2937;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        header p {
+            margin: 6px 0 0;
+            color: #D1D5DB;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 25px;
+        }
+
+        .welcome {
+            margin-bottom: 25px;
+        }
+
+        .welcome h2 {
+            margin-bottom: 5px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            font-size: 21px;
+        }
+
+        .card p {
+            color: #6B7280;
+            line-height: 1.5;
+        }
+
+        button {
+            border: none;
+            border-radius: 10px;
+            padding: 13px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            background: #4F46E5;
+            color: white;
+        }
+
+        button:hover {
+            background: #4338CA;
+        }
+
+        .game-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .mood-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .mood {
+            background: #16A34A;
+        }
+
+        .mood:hover {
+            background: #15803D;
+        }
+
+        .result {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 700px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <div class="container">
+<header>
+    <h1>🧠 MindCare</h1>
+    <p>Caregiver Dashboard</p>
+</header>
 
-        <h1>🧠 Brain Games</h1>
+<div class="container">
 
-        <p class="subtitle">
-            Train your memory, attention and reaction!
-        </p>
+    <div class="welcome">
+        <h2>Welcome to MindCare 👋</h2>
+        <p>Monitor daily activities, mood and cognitive games.</p>
+    </div>
 
-        <div class="games">
+    <div class="grid">
 
-            <!-- MEMORY GAME -->
-            <div class="game-card">
+        <!-- Reminders -->
+        <div class="card">
+            <h3>🔔 Reminders</h3>
+            <p>Manage daily water, medicine and other reminders.</p>
 
-                <div class="game-icon">
-                    🧩
-                </div>
+            <button onclick="showReminder()">
+                View Reminders
+            </button>
 
-                <div class="game-info">
-
-                    <h2>Memory Game</h2>
-
-                    <p>
-                        Test and improve your memory by matching the cards.
-                    </p>
-
-                    <a href="memory.html" class="play-btn">
-                        Play Game
-                    </a>
-
-                </div>
-
-            </div>
-
-
-            <!-- ATTENTION GAME -->
-            <div class="game-card">
-
-                <div class="game-icon">
-                    🎯
-                </div>
-
-                <div class="game-info">
-
-                    <h2>Attention Game</h2>
-
-                    <p>
-                        Test your focus by finding the different shape.
-                    </p>
-
-                    <a href="attention.html" class="play-btn">
-                        Play Game
-                    </a>
-
-                </div>
-
-            </div>
-
-
-            <!-- REACTION GAME -->
-            <div class="game-card">
-
-                <div class="game-icon">
-                    ⚡
-                </div>
-
-                <div class="game-info">
-
-                    <h2>Reaction Game</h2>
-
-                    <p>
-                        Check how quickly you can react to a changing screen.
-                    </p>
-
-                    <a href="reaction.html" class="play-btn">
-                        Play Game
-                    </a>
-
-                </div>
-
-            </div>
-
+            <div id="reminderResult" class="result"></div>
         </div>
 
+        <!-- Mood -->
+        <div class="card">
+            <h3>😊 Mood Tracker</h3>
+            <p>How are you feeling today?</p>
 
-        <!-- RESULTS & PROGRESS -->
+            <div class="mood-buttons">
+                <button class="mood" onclick="saveMood('Happy')">
+                    😊 Happy
+                </button>
 
-        <div class="game-buttons">
+                <button class="mood" onclick="saveMood('Good')">
+                    🙂 Good
+                </button>
 
-            <a href="results.html" class="play-btn">
-                📊 Results & Progress
-            </a>
+                <button class="mood" onclick="saveMood('Okay')">
+                    😐 Okay
+                </button>
 
+                <button class="mood" onclick="saveMood('Sad')">
+                    😔 Sad
+                </button>
+            </div>
+
+            <div id="moodResult" class="result"></div>
+        </div>
+
+        <!-- Brain Games -->
+        <div class="card">
+            <h3>🧠 Brain Games</h3>
+
+            <p>
+                Play cognitive games designed for memory,
+                attention and reaction.
+            </p>
+
+            <div class="game-buttons">
+
+                <button onclick="openGame('memory.html')">
+                    🧩 Memory
+                </button>
+
+                <button onclick="openGame('attention.html')">
+                    👀 Attention
+                </button>
+
+                <button onclick="openGame('reaction.html')">
+                    ⚡ Reaction
+                </button>
+
+            </div>
+        </div>
+
+        <!-- Progress -->
+        <div class="card">
+            <h3>📈 Progress</h3>
+
+            <p>
+                Check your cognitive game scores and overall progress.
+            </p>
+
+            <button onclick="openGame('results.html')">
+                View Results
+            </button>
         </div>
 
     </div>
+
+</div>
+
+<script>
+
+function openGame(page) {
+    window.location.href = "Games/" + page;
+}
+
+function saveMood(mood) {
+
+    localStorage.setItem(
+        "todayMood",
+        mood
+    );
+
+    document.getElementById(
+        "moodResult"
+    ).innerText =
+        "Today's mood: " + mood + " ✓";
+}
+
+function showReminder() {
+
+    document.getElementById(
+        "reminderResult"
+    ).innerHTML =
+        "💧 Drink Water — 10:00 AM<br>" +
+        "💊 Take Medicine — 02:00 PM";
+}
+
+</script>
 
 </body>
 </html>
